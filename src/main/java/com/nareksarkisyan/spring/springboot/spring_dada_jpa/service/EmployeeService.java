@@ -1,18 +1,18 @@
 package com.nareksarkisyan.spring.springboot.spring_dada_jpa.service;
 
-import com.nareksarkisyan.spring.springboot.spring_dada_jpa.entity.Employee;
+import com.nareksarkisyan.spring.springboot.spring_dada_jpa.entity.EmployeeDto;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getAllEmployees();
+    List<EmployeeDto> getAllEmployees();
 
-    void saveEmployee(Employee employee);
+    void saveEmployee(EmployeeDto employee);
 
-    Employee getEmployee(int id);
+    EmployeeDto getEmployee(int id);
 
     void deleteEmployee(int id);
 
-    List<Employee> findAllByName(String name);
+    List<EmployeeDto> findAllByName(String name);
 }

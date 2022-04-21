@@ -3,18 +3,15 @@ package com.nareksarkisyan.spring.springboot.spring_dada_jpa.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee")
 @Getter
 @Setter
-public class Employee {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+public class Employee extends BaseEntity {
 
     @Column(name = "name")
     private String name;
