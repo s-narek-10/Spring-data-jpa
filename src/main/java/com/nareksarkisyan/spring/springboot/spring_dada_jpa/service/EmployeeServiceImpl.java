@@ -10,6 +10,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,7 +35,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void saveEmployee(EmployeeDto employee) {
         Employee employee1 = employeeMapper.map(employee);
+        if(employee.getId() != 0){
+            employee1.setDateCreated(employeeRepository.getById(employee.getId()).getDateCreated());
+        }
+        employee1 = setAuditFields(employee1);
         employeeRepository.save(employee1);
+        employee.setId(employee1.getId());
+        employee.setDateCreated(employee1.getDateCreated());
+        employee.setDateUpdated(employee1.getDateUpdated());
+    }
+
+    @PrePersist
+    @PreUpdate
+    public Employee setAuditFields(Employee employee) {
+        Date now = new Date();
+        if (employee.getDateCreated() == null) {
+            employee.setDateCreated(now);
+            return employee;
+        }
+        employee.setDateUpdated(now);
+        return employee;
     }
 
     @Override

@@ -17,14 +17,4 @@ public class BaseEntity {
 
     private Date dateCreated;
     private Date DateUpdated;
-
-    @PrePersist
-    @PreUpdate
-    public void setAuditFields() {
-        Date now = new Date();
-        if (getDateCreated() == null) {
-            setDateCreated(now);
-        }
-        setDateUpdated(now);
-    }
 }
